@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Search, Filter, Grid, List as ListIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "./product-card";
-import { useDebounce } from "@/hooks/use-debounce"; // Assuming we might need this, or just implement simple debounce
+// Simple debounce implemented internally
 // Actually, I'll implement simple debounce inside/
 // For now, let's use standard simple timeout.
 
