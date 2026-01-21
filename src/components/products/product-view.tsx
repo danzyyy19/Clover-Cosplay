@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Search, Filter, Grid, List as ListIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "./product-card";
-// Simple debounce implemented internally
+// Simple debounce implemented internally - Force Vercel Rebuild
 // Actually, I'll implement simple debounce inside/
 // For now, let's use standard simple timeout.
 
