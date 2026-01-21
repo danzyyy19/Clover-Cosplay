@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Next.js App Service
+  app:
+    build: .
+    container_name: clover_app
+    ports:
+      - "3000:3000"
+    # Load environment variables from your local .env file
+    env_file:
+      - .env
+    # Development Mode Configuration
+    command: npm run dev
+    volumes:
+      - .:/app
+      - /app/node_modules # Use container's node_modules, not host's
+      - /app/.next # Use container's build folder
+    environment:
+      NEXTAUTH_URL: http://localhost:3000
+      WATCHPACK_POLLING: "true" # Required for Hot Reload on Windows

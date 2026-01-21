@@ -1,0 +1,73 @@
+/* Anime Toast Theme */
+.anime-toast {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid var(--color-clover-lavender) !important;
+    border-left: 6px solid var(--color-clover-violet) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.15) !important;
+    font-family: var(--font-outfit), sans-serif !important;
+    padding: 16px !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.anime-toast:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.25) !important;
+}
+
+.dark .anime-toast {
+    background: rgba(26, 26, 46, 0.95) !important;
+    border-color: var(--color-clover-purple) !important;
+    color: var(--color-dark-text) !important;
+}
+
+/* Toast Title & Description */
+.anime-toast [data-title] {
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    color: var(--text-primary) !important;
+}
+
+.anime-toast [data-description] {
+    font-size: 13px !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Success Variant */
+.anime-toast[data-type="success"] {
+    border-left-color: var(--color-clover-mint) !important;
+}
+
+.anime-toast[data-type="success"] [data-icon] {
+    color: var(--color-clover-mint) !important;
+}
+
+/* Error Variant */
+.anime-toast[data-type="error"] {
+    border-left-color: var(--color-clover-pink) !important;
+}
+
+.anime-toast[data-type="error"] [data-icon] {
+    color: var(--color-clover-pink) !important;
+}
+
+/* Info/Default Variant */
+.anime-toast[data-type="info"],
+.anime-toast[data-type="default"] {
+    border-left-color: var(--color-clover-purple) !important;
+}
+
+/* Close Button */
+.anime-toast [data-close-button] {
+    background: transparent !important;
+    border: none !important;
+    color: var(--text-secondary) !important;
+    opacity: 0.7;
+}
+
+.anime-toast [data-close-button]:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.05) !important;
+}

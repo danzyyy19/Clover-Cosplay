@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  REVIEWING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  phone         String?
+  role          Role      @default(CUSTOMER)
+  avatar        String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  bookings Booking[]
+  payments Payment[]
+
+  @@map("users")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  nameEn    String
+  nameTh    String
+  slug      String   @unique
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  categoryId    String
+  nameEn        String
+  nameTh        String
+  descriptionEn String?  @db.Text
+  descriptionTh String?  @db.Text
+  character     String?
+  anime         String?
+  pricePerDay   Decimal  @db.Decimal(10, 2)
+  size          String?
+  stock         Int      @default(1)
+  includes      String?  @db.Text
+  isAvailable   Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  category Category       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  images   ProductImage[]
+  bookings Booking[]
+
+  @@map("products")
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String
+  url       String
+  isPrimary Boolean @default(false)
+  order     Int     @default(0)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@map("product_images")
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  customerId    String
+  productId     String
+  startDate     DateTime
+  endDate       DateTime
+  totalDays     Int
+  totalPrice    Decimal       @db.Decimal(10, 2)
+  status        BookingStatus @default(PENDING)
+  rulesAccepted Boolean       @default(false)
+  adminNote     String?       @db.Text
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  customer User     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  payment  Payment?
+
+  @@map("bookings")
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  bookingId     String        @unique
+  customerId    String
+  amount        Decimal       @db.Decimal(10, 2)
+  bankName      String?
+  accountNumber String?
+  proofImageUrl String?
+  status        PaymentStatus @default(PENDING)
+  adminNote     String?       @db.Text
+  paidAt        DateTime?
+  verifiedAt    DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  booking  Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  customer User    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+model RentalRule {
+  id        String   @id @default(cuid())
+  titleEn   String
+  titleTh   String
+  contentEn String   @db.Text
+  contentTh String   @db.Text
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("rental_rules")
+}
+
+model BankAccount {
+  id            String   @id @default(cuid())
+  bankName      String
+  accountNumber String
+  accountName   String
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("bank_accounts")
+}
