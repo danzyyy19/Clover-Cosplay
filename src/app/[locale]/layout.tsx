@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { Toaster } from "sonner";
 import "../globals.css";
+import { Chatbot } from "@/components/chat/chatbot";
 
 const outfit = Outfit({
     subsets: ["latin"],
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
                                     duration: 4000,
                                 }}
                             />
+                            <Chatbot />
                         </NextIntlClientProvider>
                     </ThemeProvider>
                 </AuthProvider>
