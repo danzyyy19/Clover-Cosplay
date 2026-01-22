@@ -53,615 +53,745 @@ export default function GuidePage() {
     ];
 
     return (
-        <div
-            className="min-h-screen text-white"
-            style={{ backgroundColor: "#0D0D1A" }}
-        >
-            {/* ===== HERO SECTION ===== */}
-            <header
-                className="relative overflow-hidden"
-                style={{
-                    borderBottom: "1px solid rgba(255,255,255,0.05)",
-                    background: "linear-gradient(to bottom, #1a1a2e, #0D0D1A)"
-                }}
-            >
-                <div
-                    className="mx-auto text-center"
-                    style={{
-                        maxWidth: "1000px",
-                        padding: "80px 24px 60px 24px"
-                    }}
-                >
-                    <div
-                        className="inline-flex items-center gap-2 mb-6"
-                        style={{
-                            padding: "8px 16px",
-                            borderRadius: "9999px",
-                            backgroundColor: "rgba(255,255,255,0.05)",
-                            border: "1px solid rgba(255,255,255,0.1)"
-                        }}
-                    >
-                        <BookOpen size={16} style={{ color: "#9370DB" }} />
-                        <span style={{ fontSize: "14px", color: "#9CA3AF" }}>Official User Guide</span>
-                    </div>
+        <>
+            {/* Responsive CSS */}
+            <style jsx>{`
+                .guide-container {
+                    min-height: 100vh;
+                    background-color: #0D0D1A;
+                    color: white;
+                }
+                
+                .hero-section {
+                    background: linear-gradient(to bottom, #1a1a2e, #0D0D1A);
+                    border-bottom: 1px solid rgba(255,255,255,0.05);
+                    padding: 60px 20px;
+                    text-align: center;
+                }
+                
+                @media (min-width: 768px) {
+                    .hero-section {
+                        padding: 80px 24px;
+                    }
+                }
+                
+                .hero-content {
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+                
+                .hero-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 8px 16px;
+                    border-radius: 9999px;
+                    background-color: rgba(255,255,255,0.05);
+                    border: 1px solid rgba(255,255,255,0.1);
+                    margin-bottom: 20px;
+                    font-size: 13px;
+                    color: #9CA3AF;
+                }
+                
+                .hero-title {
+                    font-size: 32px;
+                    font-weight: bold;
+                    color: white;
+                    margin-bottom: 12px;
+                }
+                
+                @media (min-width: 768px) {
+                    .hero-title {
+                        font-size: 48px;
+                    }
+                }
+                
+                .hero-subtitle {
+                    font-size: 16px;
+                    color: #9CA3AF;
+                    max-width: 500px;
+                    margin: 0 auto;
+                }
+                
+                @media (min-width: 768px) {
+                    .hero-subtitle {
+                        font-size: 18px;
+                    }
+                }
+                
+                .main-content {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    padding: 40px 20px 80px;
+                }
+                
+                @media (min-width: 768px) {
+                    .main-content {
+                        padding: 60px 24px 100px;
+                    }
+                }
+                
+                .section {
+                    margin-bottom: 48px;
+                }
+                
+                @media (min-width: 768px) {
+                    .section {
+                        margin-bottom: 64px;
+                    }
+                }
+                
+                .section-title {
+                    font-size: 22px;
+                    font-weight: bold;
+                    color: white;
+                    margin-bottom: 8px;
+                }
+                
+                @media (min-width: 768px) {
+                    .section-title {
+                        font-size: 28px;
+                    }
+                }
+                
+                .section-subtitle {
+                    font-size: 14px;
+                    color: #9CA3AF;
+                    margin-bottom: 24px;
+                }
+                
+                /* Flowchart Grid - Mobile First */
+                .flow-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
+                
+                @media (min-width: 640px) {
+                    .flow-grid {
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 16px;
+                    }
+                }
+                
+                @media (min-width: 1024px) {
+                    .flow-grid {
+                        grid-template-columns: repeat(6, 1fr);
+                        gap: 16px;
+                    }
+                }
+                
+                .flow-card {
+                    background-color: #151520;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 16px;
+                    padding: 16px 12px;
+                    text-align: center;
+                }
+                
+                @media (min-width: 768px) {
+                    .flow-card {
+                        padding: 20px 16px;
+                    }
+                }
+                
+                .flow-number {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background-color: #9370DB;
+                    color: white;
+                    font-size: 12px;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 10px;
+                    box-shadow: 0 4px 12px rgba(147,112,219,0.3);
+                }
+                
+                .flow-icon-box {
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 10px;
+                    background-color: #0D0D1A;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 0 auto 10px;
+                }
+                
+                @media (min-width: 768px) {
+                    .flow-icon-box {
+                        width: 48px;
+                        height: 48px;
+                    }
+                }
+                
+                .flow-label {
+                    font-weight: bold;
+                    font-size: 12px;
+                    color: white;
+                    margin-bottom: 2px;
+                }
+                
+                @media (min-width: 768px) {
+                    .flow-label {
+                        font-size: 14px;
+                    }
+                }
+                
+                .flow-desc {
+                    font-size: 10px;
+                    color: #6B7280;
+                }
+                
+                @media (min-width: 768px) {
+                    .flow-desc {
+                        font-size: 11px;
+                    }
+                }
+                
+                /* Cards Grid */
+                .cards-grid {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                }
+                
+                @media (min-width: 768px) {
+                    .cards-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 20px;
+                    }
+                }
+                
+                .info-card {
+                    background-color: #12121e;
+                    border-radius: 16px;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    overflow: hidden;
+                }
+                
+                .card-header {
+                    padding: 14px 16px;
+                    border-bottom: 1px solid rgba(255,255,255,0.05);
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                
+                @media (min-width: 768px) {
+                    .card-header {
+                        padding: 16px 20px;
+                    }
+                }
+                
+                .card-header-icon {
+                    padding: 8px;
+                    border-radius: 8px;
+                }
+                
+                .card-header-title {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: white;
+                }
+                
+                @media (min-width: 768px) {
+                    .card-header-title {
+                        font-size: 18px;
+                    }
+                }
+                
+                .card-body {
+                    padding: 16px;
+                }
+                
+                @media (min-width: 768px) {
+                    .card-body {
+                        padding: 20px;
+                    }
+                }
+                
+                .card-item {
+                    display: flex;
+                    gap: 12px;
+                    margin-bottom: 14px;
+                }
+                
+                .card-item:last-child {
+                    margin-bottom: 0;
+                }
+                
+                .card-item-title {
+                    font-weight: 600;
+                    font-size: 14px;
+                    margin-bottom: 4px;
+                }
+                
+                .card-item-desc {
+                    font-size: 13px;
+                    color: #9CA3AF;
+                    line-height: 1.5;
+                }
+                
+                /* Glossary Grid */
+                .glossary-grid {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                }
+                
+                @media (min-width: 640px) {
+                    .glossary-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 16px;
+                    }
+                }
+                
+                .glossary-card {
+                    background-color: #12121e;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 12px;
+                    padding: 16px;
+                }
+                
+                /* FAQ */
+                .faq-card {
+                    background-color: #12121e;
+                    border-radius: 16px;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    padding: 24px 20px;
+                }
+                
+                @media (min-width: 768px) {
+                    .faq-card {
+                        padding: 32px 24px;
+                    }
+                }
+                
+                .faq-item {
+                    background-color: #0a0a12;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    border-radius: 12px;
+                    padding: 16px;
+                    margin-bottom: 12px;
+                }
+                
+                .faq-item:last-child {
+                    margin-bottom: 0;
+                }
+                
+                /* Alert Box */
+                .alert-box {
+                    background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(249,115,22,0.1));
+                    border-radius: 16px;
+                    padding: 20px;
+                    border: 1px solid rgba(239,68,68,0.2);
+                }
+                
+                @media (min-width: 768px) {
+                    .alert-box {
+                        padding: 24px;
+                    }
+                }
+                
+                /* CTA */
+                .cta-section {
+                    text-align: center;
+                    padding: 32px 0;
+                }
+                
+                .cta-buttons {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 12px;
+                }
+                
+                @media (min-width: 480px) {
+                    .cta-buttons {
+                        flex-direction: row;
+                        justify-content: center;
+                    }
+                }
+                
+                .btn-primary {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    padding: 14px 28px;
+                    border-radius: 9999px;
+                    background: linear-gradient(90deg, #9370DB, #EC4899);
+                    color: white;
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-size: 14px;
+                    width: 100%;
+                    max-width: 220px;
+                }
+                
+                @media (min-width: 480px) {
+                    .btn-primary {
+                        width: auto;
+                    }
+                }
+                
+                .btn-secondary {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    padding: 14px 28px;
+                    border-radius: 9999px;
+                    background-color: rgba(255,255,255,0.1);
+                    border: 1px solid rgba(255,255,255,0.2);
+                    color: white;
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-size: 14px;
+                    width: 100%;
+                    max-width: 220px;
+                }
+                
+                @media (min-width: 480px) {
+                    .btn-secondary {
+                        width: auto;
+                    }
+                }
+                
+                .footer {
+                    border-top: 1px solid rgba(255,255,255,0.05);
+                    padding: 20px;
+                    text-align: center;
+                    font-size: 13px;
+                    color: #6B7280;
+                }
+                
+                .intro-box {
+                    background: linear-gradient(135deg, rgba(147,112,219,0.15), rgba(236,72,153,0.1));
+                    border-radius: 16px;
+                    padding: 20px;
+                    border: 1px solid rgba(147,112,219,0.2);
+                    display: flex;
+                    gap: 16px;
+                    align-items: flex-start;
+                }
+                
+                @media (min-width: 768px) {
+                    .intro-box {
+                        padding: 24px;
+                    }
+                }
+                
+                .intro-icon {
+                    padding: 12px;
+                    background-color: rgba(147,112,219,0.2);
+                    border-radius: 12px;
+                    flex-shrink: 0;
+                }
+            `}</style>
 
-                    <h1
-                        className="font-bold mb-4"
-                        style={{
-                            fontSize: "clamp(32px, 5vw, 48px)",
-                            color: "white"
-                        }}
-                    >
-                        {t("title")}
-                    </h1>
-
-                    <p style={{ fontSize: "18px", color: "#9CA3AF", maxWidth: "600px", margin: "0 auto" }}>
-                        {t("subtitle")}
-                    </p>
-                </div>
-            </header>
-
-            {/* ===== MAIN CONTENT ===== */}
-            <main
-                className="mx-auto"
-                style={{
-                    maxWidth: "1000px",
-                    padding: "48px 24px 80px 24px"
-                }}
-            >
-                {/* ----- INTRODUCTION ----- */}
-                <section
-                    className="mb-16"
-                    style={{
-                        background: "linear-gradient(135deg, rgba(147,112,219,0.15), rgba(236,72,153,0.1))",
-                        borderRadius: "16px",
-                        padding: "24px",
-                        border: "1px solid rgba(147,112,219,0.2)"
-                    }}
-                >
-                    <div className="flex items-start gap-4">
-                        <div
-                            className="flex-shrink-0"
-                            style={{
-                                padding: "12px",
-                                backgroundColor: "rgba(147,112,219,0.2)",
-                                borderRadius: "12px"
-                            }}
-                        >
-                            <Info size={24} style={{ color: "#9370DB" }} />
+            <div className="guide-container">
+                {/* HERO SECTION */}
+                <header className="hero-section">
+                    <div className="hero-content">
+                        <div className="hero-badge">
+                            <BookOpen size={14} style={{ color: "#9370DB" }} />
+                            <span>Official User Guide</span>
                         </div>
-                        <div>
-                            <h2 className="font-bold mb-2" style={{ fontSize: "20px", color: "white" }}>
-                                {t("intro.title")}
-                            </h2>
-                            <p style={{ color: "#D1D5DB", lineHeight: "1.7" }}>
-                                {t("intro.content")}
-                            </p>
-                        </div>
+                        <h1 className="hero-title">{t("title")}</h1>
+                        <p className="hero-subtitle">{t("subtitle")}</p>
                     </div>
-                </section>
+                </header>
 
-                {/* ----- BOOKING PROCESS FLOWCHART ----- */}
-                <section className="mb-16">
-                    <div className="text-center mb-10">
-                        <h2 className="font-bold mb-2" style={{ fontSize: "28px", color: "white" }}>
-                            {t("flowchart.title")}
-                        </h2>
-                        <p style={{ color: "#9CA3AF" }}>Follow these simple steps to rent your favorite costume</p>
-                    </div>
+                {/* MAIN CONTENT */}
+                <main className="main-content">
 
-                    {/* Flowchart Grid */}
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-                            gap: "16px"
-                        }}
-                    >
-                        {flowSteps.map((step) => (
-                            <div
-                                key={step.id}
-                                style={{
-                                    backgroundColor: "#151520",
-                                    border: "1px solid rgba(255,255,255,0.05)",
-                                    borderRadius: "16px",
-                                    padding: "20px 16px",
-                                    textAlign: "center"
-                                }}
-                            >
-                                {/* Step Number */}
-                                <div
-                                    style={{
-                                        width: "32px",
-                                        height: "32px",
-                                        borderRadius: "50%",
-                                        backgroundColor: "#9370DB",
-                                        color: "white",
-                                        fontSize: "14px",
-                                        fontWeight: "bold",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        margin: "0 auto 12px auto",
-                                        boxShadow: "0 4px 12px rgba(147,112,219,0.3)"
-                                    }}
-                                >
-                                    {step.id}
-                                </div>
-
-                                {/* Icon */}
-                                <div
-                                    style={{
-                                        width: "48px",
-                                        height: "48px",
-                                        borderRadius: "12px",
-                                        backgroundColor: "#0D0D1A",
-                                        border: "1px solid rgba(255,255,255,0.1)",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        margin: "0 auto 12px auto"
-                                    }}
-                                >
-                                    <step.icon size={22} style={{ color: "#9370DB" }} />
-                                </div>
-
-                                {/* Label */}
-                                <h3 style={{ fontWeight: "bold", fontSize: "14px", color: "white", marginBottom: "4px" }}>
-                                    {step.label}
-                                </h3>
-                                <p style={{ fontSize: "12px", color: "#6B7280" }}>{step.desc}</p>
+                    {/* Introduction */}
+                    <section className="section">
+                        <div className="intro-box">
+                            <div className="intro-icon">
+                                <Info size={24} style={{ color: "#9370DB" }} />
                             </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* ----- DETAILED GUIDE SECTIONS ----- */}
-                <div
-                    className="mb-16"
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                        gap: "24px"
-                    }}
-                >
-                    {/* Getting Started */}
-                    <section
-                        style={{
-                            backgroundColor: "#12121e",
-                            borderRadius: "16px",
-                            border: "1px solid rgba(255,255,255,0.05)",
-                            overflow: "hidden"
-                        }}
-                    >
-                        <div
-                            style={{
-                                background: "linear-gradient(90deg, rgba(59,130,246,0.2), rgba(59,130,246,0.05))",
-                                padding: "16px 20px",
-                                borderBottom: "1px solid rgba(255,255,255,0.05)"
-                            }}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div style={{ padding: "8px", backgroundColor: "rgba(59,130,246,0.2)", borderRadius: "8px" }}>
-                                    <User size={20} style={{ color: "#60A5FA" }} />
-                                </div>
-                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
-                                    {t("account.title")}
-                                </h3>
+                            <div>
+                                <h2 style={{ fontWeight: "bold", fontSize: "18px", color: "white", marginBottom: "8px" }}>
+                                    {t("intro.title")}
+                                </h2>
+                                <p style={{ color: "#D1D5DB", lineHeight: "1.6", fontSize: "14px" }}>
+                                    {t("intro.content")}
+                                </p>
                             </div>
                         </div>
-                        <div style={{ padding: "20px" }}>
-                            <div className="flex gap-3 mb-5">
-                                <CheckCircle size={18} style={{ color: "#60A5FA", flexShrink: 0, marginTop: "2px" }} />
-                                <div>
-                                    <h4 style={{ fontWeight: "600", color: "#93C5FD", marginBottom: "4px" }}>
-                                        {t("account.register")}
-                                    </h4>
-                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                        {t("account.registerDesc")}
-                                    </p>
+                    </section>
+
+                    {/* Booking Process Flow */}
+                    <section className="section">
+                        <div style={{ textAlign: "center", marginBottom: "24px" }}>
+                            <h2 className="section-title">{t("flowchart.title")}</h2>
+                            <p className="section-subtitle">Follow these simple steps to rent your favorite costume</p>
+                        </div>
+
+                        <div className="flow-grid">
+                            {flowSteps.map((step) => (
+                                <div key={step.id} className="flow-card">
+                                    <div className="flow-number">{step.id}</div>
+                                    <div className="flow-icon-box">
+                                        <step.icon size={20} style={{ color: "#9370DB" }} />
+                                    </div>
+                                    <div className="flow-label">{step.label}</div>
+                                    <div className="flow-desc">{step.desc}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Info Cards Grid */}
+                    <section className="section">
+                        <div className="cards-grid">
+                            {/* Getting Started */}
+                            <div className="info-card">
+                                <div className="card-header" style={{ background: "linear-gradient(90deg, rgba(59,130,246,0.2), rgba(59,130,246,0.05))" }}>
+                                    <div className="card-header-icon" style={{ backgroundColor: "rgba(59,130,246,0.2)" }}>
+                                        <User size={18} style={{ color: "#60A5FA" }} />
+                                    </div>
+                                    <h3 className="card-header-title">{t("account.title")}</h3>
+                                </div>
+                                <div className="card-body">
+                                    <div className="card-item">
+                                        <CheckCircle size={16} style={{ color: "#60A5FA", flexShrink: 0, marginTop: "2px" }} />
+                                        <div>
+                                            <div className="card-item-title" style={{ color: "#93C5FD" }}>{t("account.register")}</div>
+                                            <div className="card-item-desc">{t("account.registerDesc")}</div>
+                                        </div>
+                                    </div>
+                                    <div className="card-item">
+                                        <CheckCircle size={16} style={{ color: "#60A5FA", flexShrink: 0, marginTop: "2px" }} />
+                                        <div>
+                                            <div className="card-item-title" style={{ color: "#93C5FD" }}>{t("account.login")}</div>
+                                            <div className="card-item-desc">{t("account.loginDesc")}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex gap-3">
-                                <CheckCircle size={18} style={{ color: "#60A5FA", flexShrink: 0, marginTop: "2px" }} />
-                                <div>
-                                    <h4 style={{ fontWeight: "600", color: "#93C5FD", marginBottom: "4px" }}>
-                                        {t("account.login")}
-                                    </h4>
-                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                        {t("account.loginDesc")}
-                                    </p>
+
+                            {/* How to Rent */}
+                            <div className="info-card">
+                                <div className="card-header" style={{ background: "linear-gradient(90deg, rgba(236,72,153,0.2), rgba(236,72,153,0.05))" }}>
+                                    <div className="card-header-icon" style={{ backgroundColor: "rgba(236,72,153,0.2)" }}>
+                                        <ShoppingBag size={18} style={{ color: "#F472B6" }} />
+                                    </div>
+                                    <h3 className="card-header-title">{t("booking.title")}</h3>
+                                </div>
+                                <div className="card-body">
+                                    {[1, 2, 3].map((num) => (
+                                        <div key={num} className="card-item">
+                                            <div style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                borderRadius: "50%",
+                                                backgroundColor: "rgba(236,72,153,0.2)",
+                                                color: "#F472B6",
+                                                fontSize: "11px",
+                                                fontWeight: "bold",
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                flexShrink: 0,
+                                                marginTop: "2px"
+                                            }}>
+                                                {num}
+                                            </div>
+                                            <div>
+                                                <div className="card-item-title" style={{ color: "#FBCFE8" }}>{t(`booking.step${num}`)}</div>
+                                                <div className="card-item-desc">{t(`booking.step${num}Desc`)}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Payments */}
+                            <div className="info-card">
+                                <div className="card-header" style={{ background: "linear-gradient(90deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05))" }}>
+                                    <div className="card-header-icon" style={{ backgroundColor: "rgba(34,197,94,0.2)" }}>
+                                        <Wallet size={18} style={{ color: "#4ADE80" }} />
+                                    </div>
+                                    <h3 className="card-header-title">{t("payment.title")}</h3>
+                                </div>
+                                <div className="card-body">
+                                    <p style={{ fontSize: "13px", color: "#9CA3AF", marginBottom: "14px" }}>{t("payment.instruction")}</p>
+                                    <div className="card-item">
+                                        <CreditCard size={16} style={{ color: "#4ADE80", flexShrink: 0, marginTop: "2px" }} />
+                                        <div>
+                                            <div className="card-item-title" style={{ color: "#86EFAC" }}>{t("payment.bank")}</div>
+                                            <div className="card-item-desc">{t("payment.bankDesc")}</div>
+                                        </div>
+                                    </div>
+                                    <div className="card-item">
+                                        <Upload size={16} style={{ color: "#4ADE80", flexShrink: 0, marginTop: "2px" }} />
+                                        <div>
+                                            <div className="card-item-title" style={{ color: "#86EFAC" }}>{t("payment.proof")}</div>
+                                            <div className="card-item-desc">{t("payment.proofDesc")}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Dashboard */}
+                            <div className="info-card">
+                                <div className="card-header" style={{ background: "linear-gradient(90deg, rgba(251,191,36,0.2), rgba(251,191,36,0.05))" }}>
+                                    <div className="card-header-icon" style={{ backgroundColor: "rgba(251,191,36,0.2)" }}>
+                                        <LayoutDashboard size={18} style={{ color: "#FBBF24" }} />
+                                    </div>
+                                    <h3 className="card-header-title">{t("dashboard.title")}</h3>
+                                </div>
+                                <div className="card-body">
+                                    <p style={{ fontSize: "13px", color: "#9CA3AF", marginBottom: "14px" }}>{t("dashboard.overview")}</p>
+                                    <div className="card-item">
+                                        <Clock size={16} style={{ color: "#FBBF24", flexShrink: 0, marginTop: "2px" }} />
+                                        <div>
+                                            <div className="card-item-title" style={{ color: "#FDE68A" }}>{t("dashboard.myRentals")}</div>
+                                            <div className="card-item-desc">{t("dashboard.myRentalsDesc")}</div>
+                                        </div>
+                                    </div>
+                                    <div className="card-item">
+                                        <Receipt size={16} style={{ color: "#FBBF24", flexShrink: 0, marginTop: "2px" }} />
+                                        <div>
+                                            <div className="card-item-title" style={{ color: "#FDE68A" }}>{t("dashboard.receipts")}</div>
+                                            <div className="card-item-desc">{t("dashboard.receiptsDesc")}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    {/* How to Rent */}
-                    <section
-                        style={{
-                            backgroundColor: "#12121e",
-                            borderRadius: "16px",
-                            border: "1px solid rgba(255,255,255,0.05)",
-                            overflow: "hidden"
-                        }}
-                    >
-                        <div
-                            style={{
-                                background: "linear-gradient(90deg, rgba(236,72,153,0.2), rgba(236,72,153,0.05))",
-                                padding: "16px 20px",
-                                borderBottom: "1px solid rgba(255,255,255,0.05)"
-                            }}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div style={{ padding: "8px", backgroundColor: "rgba(236,72,153,0.2)", borderRadius: "8px" }}>
-                                    <ShoppingBag size={20} style={{ color: "#F472B6" }} />
-                                </div>
-                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
-                                    {t("booking.title")}
-                                </h3>
+                    {/* Glossary */}
+                    <section className="section">
+                        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+                            <div style={{ padding: "10px", backgroundColor: "rgba(16,185,129,0.2)", borderRadius: "10px" }}>
+                                <BookOpen size={22} style={{ color: "#34D399" }} />
+                            </div>
+                            <div>
+                                <h2 style={{ fontSize: "20px", fontWeight: "bold", color: "white" }}>{t("glossary.title")}</h2>
+                                <p style={{ fontSize: "13px", color: "#9CA3AF" }}>Important terms you should know</p>
                             </div>
                         </div>
-                        <div style={{ padding: "20px" }}>
-                            {[1, 2, 3].map((num) => (
-                                <div key={num} className="flex gap-3" style={{ marginBottom: num < 3 ? "16px" : 0 }}>
-                                    <div
-                                        style={{
-                                            width: "24px",
-                                            height: "24px",
-                                            borderRadius: "50%",
-                                            backgroundColor: "rgba(236,72,153,0.2)",
-                                            color: "#F472B6",
-                                            fontSize: "12px",
-                                            fontWeight: "bold",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                            flexShrink: 0,
-                                            marginTop: "2px"
-                                        }}
-                                    >
-                                        {num}
-                                    </div>
-                                    <div>
-                                        <h4 style={{ fontWeight: "600", color: "#FBCFE8", marginBottom: "4px" }}>
-                                            {t(`booking.step${num}`)}
-                                        </h4>
-                                        <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                            {t(`booking.step${num}Desc`)}
-                                        </p>
+
+                        <div className="glossary-grid">
+                            {glossaryTerms.map((item, idx) => (
+                                <div key={idx} className="glossary-card">
+                                    <div style={{ display: "flex", gap: "12px" }}>
+                                        <div style={{ padding: "6px", backgroundColor: "rgba(16,185,129,0.1)", borderRadius: "6px", height: "fit-content" }}>
+                                            <item.icon size={14} style={{ color: "#34D399" }} />
+                                        </div>
+                                        <div>
+                                            <h4 style={{ fontWeight: "bold", color: "#A7F3D0", marginBottom: "4px", fontSize: "14px" }}>{item.term}</h4>
+                                            <p style={{ fontSize: "13px", color: "#9CA3AF", lineHeight: "1.5" }}>{item.def}</p>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </section>
 
-                    {/* Payments & Verification */}
-                    <section
-                        style={{
-                            backgroundColor: "#12121e",
-                            borderRadius: "16px",
-                            border: "1px solid rgba(255,255,255,0.05)",
-                            overflow: "hidden"
-                        }}
-                    >
-                        <div
-                            style={{
-                                background: "linear-gradient(90deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05))",
-                                padding: "16px 20px",
-                                borderBottom: "1px solid rgba(255,255,255,0.05)"
-                            }}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div style={{ padding: "8px", backgroundColor: "rgba(34,197,94,0.2)", borderRadius: "8px" }}>
-                                    <Wallet size={20} style={{ color: "#4ADE80" }} />
+                    {/* FAQ */}
+                    <section className="section">
+                        <div className="faq-card">
+                            <div style={{ textAlign: "center", marginBottom: "24px" }}>
+                                <div style={{
+                                    width: "44px",
+                                    height: "44px",
+                                    borderRadius: "50%",
+                                    backgroundColor: "rgba(234,179,8,0.1)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    margin: "0 auto 12px"
+                                }}>
+                                    <HelpCircle size={22} style={{ color: "#EAB308" }} />
                                 </div>
-                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
-                                    {t("payment.title")}
-                                </h3>
+                                <h2 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "6px" }}>{t("faq.title")}</h2>
+                                <p style={{ fontSize: "13px", color: "#9CA3AF" }}>Quick answers to common questions</p>
                             </div>
-                        </div>
-                        <div style={{ padding: "20px" }}>
-                            <p style={{ fontSize: "14px", color: "#9CA3AF", marginBottom: "16px" }}>
-                                {t("payment.instruction")}
-                            </p>
-                            <div className="flex gap-3 mb-4">
-                                <CreditCard size={18} style={{ color: "#4ADE80", flexShrink: 0, marginTop: "2px" }} />
-                                <div>
-                                    <h4 style={{ fontWeight: "600", color: "#86EFAC", marginBottom: "4px" }}>
-                                        {t("payment.bank")}
-                                    </h4>
-                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                        {t("payment.bankDesc")}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="flex gap-3">
-                                <Upload size={18} style={{ color: "#4ADE80", flexShrink: 0, marginTop: "2px" }} />
-                                <div>
-                                    <h4 style={{ fontWeight: "600", color: "#86EFAC", marginBottom: "4px" }}>
-                                        {t("payment.proof")}
-                                    </h4>
-                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                        {t("payment.proofDesc")}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
 
-                    {/* Customer Dashboard */}
-                    <section
-                        style={{
-                            backgroundColor: "#12121e",
-                            borderRadius: "16px",
-                            border: "1px solid rgba(255,255,255,0.05)",
-                            overflow: "hidden"
-                        }}
-                    >
-                        <div
-                            style={{
-                                background: "linear-gradient(90deg, rgba(251,191,36,0.2), rgba(251,191,36,0.05))",
-                                padding: "16px 20px",
-                                borderBottom: "1px solid rgba(255,255,255,0.05)"
-                            }}
-                        >
-                            <div className="flex items-center gap-3">
-                                <div style={{ padding: "8px", backgroundColor: "rgba(251,191,36,0.2)", borderRadius: "8px" }}>
-                                    <LayoutDashboard size={20} style={{ color: "#FBBF24" }} />
-                                </div>
-                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
-                                    {t("dashboard.title")}
-                                </h3>
-                            </div>
-                        </div>
-                        <div style={{ padding: "20px" }}>
-                            <p style={{ fontSize: "14px", color: "#9CA3AF", marginBottom: "16px" }}>
-                                {t("dashboard.overview")}
-                            </p>
-                            <div className="flex gap-3 mb-4">
-                                <Clock size={18} style={{ color: "#FBBF24", flexShrink: 0, marginTop: "2px" }} />
-                                <div>
-                                    <h4 style={{ fontWeight: "600", color: "#FDE68A", marginBottom: "4px" }}>
-                                        {t("dashboard.myRentals")}
-                                    </h4>
-                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                        {t("dashboard.myRentalsDesc")}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="flex gap-3">
-                                <Receipt size={18} style={{ color: "#FBBF24", flexShrink: 0, marginTop: "2px" }} />
-                                <div>
-                                    <h4 style={{ fontWeight: "600", color: "#FDE68A", marginBottom: "4px" }}>
-                                        {t("dashboard.receipts")}
-                                    </h4>
-                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                        {t("dashboard.receiptsDesc")}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-
-                {/* ----- GLOSSARY OF TERMS ----- */}
-                <section className="mb-16">
-                    <div className="flex items-center gap-3 mb-8">
-                        <div style={{ padding: "12px", backgroundColor: "rgba(16,185,129,0.2)", borderRadius: "12px" }}>
-                            <BookOpen size={24} style={{ color: "#34D399" }} />
-                        </div>
-                        <div>
-                            <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "white" }}>
-                                {t("glossary.title")}
-                            </h2>
-                            <p style={{ fontSize: "14px", color: "#9CA3AF" }}>Important terms you should know</p>
-                        </div>
-                    </div>
-
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                            gap: "16px"
-                        }}
-                    >
-                        {glossaryTerms.map((item, idx) => (
-                            <div
-                                key={idx}
-                                style={{
-                                    backgroundColor: "#12121e",
-                                    border: "1px solid rgba(255,255,255,0.05)",
-                                    borderRadius: "12px",
-                                    padding: "20px"
-                                }}
-                            >
-                                <div className="flex gap-3">
-                                    <div style={{ padding: "8px", backgroundColor: "rgba(16,185,129,0.1)", borderRadius: "8px", height: "fit-content" }}>
-                                        <item.icon size={16} style={{ color: "#34D399" }} />
+                            <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+                                {faqItems.map((item, idx) => (
+                                    <div key={idx} className="faq-item">
+                                        <div style={{ display: "flex", gap: "10px" }}>
+                                            <span style={{ color: "#EAB308", fontWeight: "bold", fontSize: "13px" }}>Q{idx + 1}</span>
+                                            <div>
+                                                <h4 style={{ fontWeight: "600", color: "white", marginBottom: "6px", fontSize: "14px" }}>{item.q}</h4>
+                                                <p style={{ fontSize: "13px", color: "#9CA3AF", lineHeight: "1.5" }}>{item.a}</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 style={{ fontWeight: "bold", color: "#A7F3D0", marginBottom: "6px" }}>
-                                            {item.term}
-                                        </h4>
-                                        <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                            {item.def}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* ----- FAQ SECTION ----- */}
-                <section
-                    className="mb-16"
-                    style={{
-                        backgroundColor: "#12121e",
-                        borderRadius: "16px",
-                        border: "1px solid rgba(255,255,255,0.05)",
-                        padding: "32px 24px"
-                    }}
-                >
-                    <div className="text-center mb-10">
-                        <div
-                            style={{
-                                width: "48px",
-                                height: "48px",
-                                borderRadius: "50%",
-                                backgroundColor: "rgba(234,179,8,0.1)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                margin: "0 auto 16px auto"
-                            }}
-                        >
-                            <HelpCircle size={24} style={{ color: "#EAB308" }} />
-                        </div>
-                        <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "white", marginBottom: "8px" }}>
-                            {t("faq.title")}
-                        </h2>
-                        <p style={{ fontSize: "14px", color: "#9CA3AF" }}>Quick answers to common questions</p>
-                    </div>
-
-                    <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-                        {faqItems.map((item, idx) => (
-                            <div
-                                key={idx}
-                                style={{
-                                    backgroundColor: "#0a0a12",
-                                    border: "1px solid rgba(255,255,255,0.05)",
-                                    borderRadius: "12px",
-                                    padding: "20px",
-                                    marginBottom: idx < faqItems.length - 1 ? "12px" : 0
-                                }}
-                            >
-                                <div className="flex gap-3">
-                                    <span style={{ color: "#EAB308", fontWeight: "bold", fontSize: "14px" }}>
-                                        Q{idx + 1}
-                                    </span>
-                                    <div>
-                                        <h4 style={{ fontWeight: "600", color: "white", marginBottom: "8px" }}>
-                                            {item.q}
-                                        </h4>
-                                        <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
-                                            {item.a}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* ----- IMPORTANT NOTES ----- */}
-                <section
-                    className="mb-16"
-                    style={{
-                        background: "linear-gradient(135deg, rgba(239,68,68,0.15), rgba(249,115,22,0.1))",
-                        borderRadius: "16px",
-                        padding: "24px",
-                        border: "1px solid rgba(239,68,68,0.2)"
-                    }}
-                >
-                    <div className="flex items-start gap-4">
-                        <div
-                            style={{
-                                padding: "12px",
-                                backgroundColor: "rgba(239,68,68,0.2)",
-                                borderRadius: "12px",
-                                flexShrink: 0
-                            }}
-                        >
-                            <AlertCircle size={24} style={{ color: "#F87171" }} />
-                        </div>
-                        <div>
-                            <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>
-                                Important Reminders
-                            </h3>
-                            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                                {[
-                                    "Always return costumes in clean, good condition to get your full deposit back.",
-                                    "Late returns incur additional fees. Please return on or before your rental end date.",
-                                    "Report any damage immediately to avoid penalties.",
-                                    "Keep your payment proof until your deposit is refunded."
-                                ].map((text, i) => (
-                                    <li
-                                        key={i}
-                                        className="flex items-start gap-2"
-                                        style={{ marginBottom: i < 3 ? "8px" : 0 }}
-                                    >
-                                        <span style={{ color: "#F87171", marginTop: "4px" }}>•</span>
-                                        <span style={{ fontSize: "14px", color: "#D1D5DB", lineHeight: "1.6" }}>
-                                            {text}
-                                        </span>
-                                    </li>
                                 ))}
-                            </ul>
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
 
-                {/* ----- CTA SECTION ----- */}
-                <section className="text-center" style={{ paddingTop: "24px" }}>
-                    <h3 style={{ fontSize: "24px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>
-                        Ready to start your cosplay journey?
-                    </h3>
-                    <p style={{ color: "#9CA3AF", marginBottom: "24px" }}>
-                        Browse our collection and find your perfect costume today!
-                    </p>
+                    {/* Important Reminders */}
+                    <section className="section">
+                        <div className="alert-box">
+                            <div style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
+                                <div style={{ padding: "10px", backgroundColor: "rgba(239,68,68,0.2)", borderRadius: "10px", flexShrink: 0 }}>
+                                    <AlertCircle size={22} style={{ color: "#F87171" }} />
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: "16px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>Important Reminders</h3>
+                                    <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                                        {[
+                                            "Always return costumes in clean, good condition to get your full deposit back.",
+                                            "Late returns incur additional fees. Please return on or before your rental end date.",
+                                            "Report any damage immediately to avoid penalties.",
+                                            "Keep your payment proof until your deposit is refunded."
+                                        ].map((text, i) => (
+                                            <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: i < 3 ? "6px" : 0 }}>
+                                                <span style={{ color: "#F87171", marginTop: "3px" }}>•</span>
+                                                <span style={{ fontSize: "13px", color: "#D1D5DB", lineHeight: "1.5" }}>{text}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <Link
-                            href="/products"
-                            className="inline-flex items-center gap-2"
-                            style={{
-                                padding: "14px 28px",
-                                borderRadius: "9999px",
-                                background: "linear-gradient(90deg, #9370DB, #EC4899)",
-                                color: "white",
-                                fontWeight: "bold",
-                                textDecoration: "none"
-                            }}
-                        >
-                            Browse Costumes
-                            <ArrowRight size={18} />
-                        </Link>
-                        <Link
-                            href="/register"
-                            className="inline-flex items-center gap-2"
-                            style={{
-                                padding: "14px 28px",
-                                borderRadius: "9999px",
-                                backgroundColor: "rgba(255,255,255,0.1)",
-                                border: "1px solid rgba(255,255,255,0.2)",
-                                color: "white",
-                                fontWeight: "bold",
-                                textDecoration: "none"
-                            }}
-                        >
-                            Create Account
-                        </Link>
-                    </div>
-                </section>
+                    {/* CTA */}
+                    <section className="cta-section">
+                        <h3 style={{ fontSize: "22px", fontWeight: "bold", color: "white", marginBottom: "10px" }}>
+                            Ready to start your cosplay journey?
+                        </h3>
+                        <p style={{ color: "#9CA3AF", marginBottom: "20px", fontSize: "14px" }}>
+                            Browse our collection and find your perfect costume today!
+                        </p>
 
-            </main>
+                        <div className="cta-buttons">
+                            <Link href="/products" className="btn-primary">
+                                Browse Costumes
+                                <ArrowRight size={16} />
+                            </Link>
+                            <Link href="/register" className="btn-secondary">
+                                Create Account
+                            </Link>
+                        </div>
+                    </section>
 
-            {/* ===== FOOTER NOTE ===== */}
-            <footer
-                className="text-center"
-                style={{
-                    borderTop: "1px solid rgba(255,255,255,0.05)",
-                    padding: "24px"
-                }}
-            >
-                <p style={{ fontSize: "14px", color: "#6B7280" }}>
+                </main>
+
+                {/* Footer */}
+                <footer className="footer">
                     Need help? Contact us at{" "}
                     <a href="mailto:support@clovercosplay.com" style={{ color: "#9370DB" }}>
                         support@clovercosplay.com
                     </a>
-                </p>
-            </footer>
-        </div>
+                </footer>
+            </div>
+        </>
     );
 }
