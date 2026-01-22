@@ -42,7 +42,7 @@ export async function POST(req: Request) {
                 Authorization: `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: "llama3-8b-8192", // Changed to 8b model for better stability
+                model: "llama-3.3-70b-versatile", // Updated to latest supported model
                 messages: [
                     { role: "system", content: systemPrompt },
                     ...messages
