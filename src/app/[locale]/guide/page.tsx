@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import {
@@ -19,8 +21,7 @@ import {
     Upload,
     Clock,
     AlertCircle,
-    Wallet,
-    ChevronRight
+    Wallet
 } from "lucide-react";
 
 export default function GuidePage() {
@@ -52,136 +53,282 @@ export default function GuidePage() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0f0f1a] via-[#0D0D1A] to-[#0a0a12] text-white">
-
+        <div
+            className="min-h-screen text-white"
+            style={{ backgroundColor: "#0D0D1A" }}
+        >
             {/* ===== HERO SECTION ===== */}
-            <header className="relative overflow-hidden border-b border-white/5">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/10" />
-                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-
-                <div className="relative max-w-5xl mx-auto px-6 py-20 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
-                        <BookOpen size={16} className="text-purple-400" />
-                        <span className="text-sm font-medium text-gray-300">Official User Guide</span>
+            <header
+                className="relative overflow-hidden"
+                style={{
+                    borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    background: "linear-gradient(to bottom, #1a1a2e, #0D0D1A)"
+                }}
+            >
+                <div
+                    className="mx-auto text-center"
+                    style={{
+                        maxWidth: "1000px",
+                        padding: "80px 24px 60px 24px"
+                    }}
+                >
+                    <div
+                        className="inline-flex items-center gap-2 mb-6"
+                        style={{
+                            padding: "8px 16px",
+                            borderRadius: "9999px",
+                            backgroundColor: "rgba(255,255,255,0.05)",
+                            border: "1px solid rgba(255,255,255,0.1)"
+                        }}
+                    >
+                        <BookOpen size={16} style={{ color: "#9370DB" }} />
+                        <span style={{ fontSize: "14px", color: "#9CA3AF" }}>Official User Guide</span>
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 bg-gradient-to-r from-white via-purple-100 to-purple-300 bg-clip-text text-transparent">
+                    <h1
+                        className="font-bold mb-4"
+                        style={{
+                            fontSize: "clamp(32px, 5vw, 48px)",
+                            color: "white"
+                        }}
+                    >
                         {t("title")}
                     </h1>
 
-                    <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p style={{ fontSize: "18px", color: "#9CA3AF", maxWidth: "600px", margin: "0 auto" }}>
                         {t("subtitle")}
                     </p>
                 </div>
             </header>
 
             {/* ===== MAIN CONTENT ===== */}
-            <main className="max-w-5xl mx-auto px-6 py-16 space-y-24">
-
+            <main
+                className="mx-auto"
+                style={{
+                    maxWidth: "1000px",
+                    padding: "48px 24px 80px 24px"
+                }}
+            >
                 {/* ----- INTRODUCTION ----- */}
-                <section className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 rounded-2xl p-8 border border-purple-500/20">
+                <section
+                    className="mb-16"
+                    style={{
+                        background: "linear-gradient(135deg, rgba(147,112,219,0.15), rgba(236,72,153,0.1))",
+                        borderRadius: "16px",
+                        padding: "24px",
+                        border: "1px solid rgba(147,112,219,0.2)"
+                    }}
+                >
                     <div className="flex items-start gap-4">
-                        <div className="p-3 bg-purple-500/20 rounded-xl text-purple-400 flex-shrink-0">
-                            <Info size={24} />
+                        <div
+                            className="flex-shrink-0"
+                            style={{
+                                padding: "12px",
+                                backgroundColor: "rgba(147,112,219,0.2)",
+                                borderRadius: "12px"
+                            }}
+                        >
+                            <Info size={24} style={{ color: "#9370DB" }} />
                         </div>
                         <div>
-                            <h2 className="text-xl font-bold text-white mb-2">{t("intro.title")}</h2>
-                            <p className="text-gray-300 leading-relaxed">{t("intro.content")}</p>
+                            <h2 className="font-bold mb-2" style={{ fontSize: "20px", color: "white" }}>
+                                {t("intro.title")}
+                            </h2>
+                            <p style={{ color: "#D1D5DB", lineHeight: "1.7" }}>
+                                {t("intro.content")}
+                            </p>
                         </div>
                     </div>
                 </section>
 
                 {/* ----- BOOKING PROCESS FLOWCHART ----- */}
-                <section>
-                    <div className="text-center mb-12">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">{t("flowchart.title")}</h2>
-                        <p className="text-gray-400">Follow these simple steps to rent your favorite costume</p>
+                <section className="mb-16">
+                    <div className="text-center mb-10">
+                        <h2 className="font-bold mb-2" style={{ fontSize: "28px", color: "white" }}>
+                            {t("flowchart.title")}
+                        </h2>
+                        <p style={{ color: "#9CA3AF" }}>Follow these simple steps to rent your favorite costume</p>
                     </div>
 
                     {/* Flowchart Grid */}
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                        {flowSteps.map((step, index) => (
-                            <div key={step.id} className="relative group">
-                                {/* Step Card */}
-                                <div className="bg-[#151520] border border-white/5 rounded-2xl p-5 text-center hover:border-purple-500/50 hover:bg-[#1a1a28] transition-all duration-300 h-full flex flex-col items-center justify-start">
-
-                                    {/* Step Number */}
-                                    <div className="w-8 h-8 rounded-full bg-purple-600 text-white text-sm font-bold flex items-center justify-center mb-4 shadow-lg shadow-purple-600/30">
-                                        {step.id}
-                                    </div>
-
-                                    {/* Icon */}
-                                    <div className="w-14 h-14 rounded-xl bg-[#0D0D1A] border border-white/10 flex items-center justify-center mb-4 group-hover:border-purple-500/50 transition-colors">
-                                        <step.icon size={24} className="text-purple-400" />
-                                    </div>
-
-                                    {/* Label */}
-                                    <h3 className="font-bold text-white text-sm mb-1">{step.label}</h3>
-                                    <p className="text-xs text-gray-500">{step.desc}</p>
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+                            gap: "16px"
+                        }}
+                    >
+                        {flowSteps.map((step) => (
+                            <div
+                                key={step.id}
+                                style={{
+                                    backgroundColor: "#151520",
+                                    border: "1px solid rgba(255,255,255,0.05)",
+                                    borderRadius: "16px",
+                                    padding: "20px 16px",
+                                    textAlign: "center"
+                                }}
+                            >
+                                {/* Step Number */}
+                                <div
+                                    style={{
+                                        width: "32px",
+                                        height: "32px",
+                                        borderRadius: "50%",
+                                        backgroundColor: "#9370DB",
+                                        color: "white",
+                                        fontSize: "14px",
+                                        fontWeight: "bold",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        margin: "0 auto 12px auto",
+                                        boxShadow: "0 4px 12px rgba(147,112,219,0.3)"
+                                    }}
+                                >
+                                    {step.id}
                                 </div>
 
-                                {/* Arrow (hidden on last item and mobile) */}
-                                {index < flowSteps.length - 1 && (
-                                    <div className="hidden lg:flex absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                                        <ChevronRight size={20} className="text-purple-500/50" />
-                                    </div>
-                                )}
+                                {/* Icon */}
+                                <div
+                                    style={{
+                                        width: "48px",
+                                        height: "48px",
+                                        borderRadius: "12px",
+                                        backgroundColor: "#0D0D1A",
+                                        border: "1px solid rgba(255,255,255,0.1)",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        margin: "0 auto 12px auto"
+                                    }}
+                                >
+                                    <step.icon size={22} style={{ color: "#9370DB" }} />
+                                </div>
+
+                                {/* Label */}
+                                <h3 style={{ fontWeight: "bold", fontSize: "14px", color: "white", marginBottom: "4px" }}>
+                                    {step.label}
+                                </h3>
+                                <p style={{ fontSize: "12px", color: "#6B7280" }}>{step.desc}</p>
                             </div>
                         ))}
                     </div>
                 </section>
 
                 {/* ----- DETAILED GUIDE SECTIONS ----- */}
-                <div className="grid md:grid-cols-2 gap-8">
-
+                <div
+                    className="mb-16"
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                        gap: "24px"
+                    }}
+                >
                     {/* Getting Started */}
-                    <section className="bg-[#12121e] rounded-2xl border border-white/5 overflow-hidden">
-                        <div className="bg-gradient-to-r from-blue-600/20 to-blue-900/20 px-6 py-4 border-b border-white/5">
+                    <section
+                        style={{
+                            backgroundColor: "#12121e",
+                            borderRadius: "16px",
+                            border: "1px solid rgba(255,255,255,0.05)",
+                            overflow: "hidden"
+                        }}
+                    >
+                        <div
+                            style={{
+                                background: "linear-gradient(90deg, rgba(59,130,246,0.2), rgba(59,130,246,0.05))",
+                                padding: "16px 20px",
+                                borderBottom: "1px solid rgba(255,255,255,0.05)"
+                            }}
+                        >
                             <div className="flex items-center gap-3">
-                                <div className="p-2 bg-blue-500/20 rounded-lg">
-                                    <User size={20} className="text-blue-400" />
+                                <div style={{ padding: "8px", backgroundColor: "rgba(59,130,246,0.2)", borderRadius: "8px" }}>
+                                    <User size={20} style={{ color: "#60A5FA" }} />
                                 </div>
-                                <h3 className="text-lg font-bold text-white">{t("account.title")}</h3>
+                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
+                                    {t("account.title")}
+                                </h3>
                             </div>
                         </div>
-                        <div className="p-6 space-y-6">
-                            <div className="flex gap-4">
-                                <CheckCircle size={20} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                        <div style={{ padding: "20px" }}>
+                            <div className="flex gap-3 mb-5">
+                                <CheckCircle size={18} style={{ color: "#60A5FA", flexShrink: 0, marginTop: "2px" }} />
                                 <div>
-                                    <h4 className="font-semibold text-blue-200 mb-1">{t("account.register")}</h4>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{t("account.registerDesc")}</p>
+                                    <h4 style={{ fontWeight: "600", color: "#93C5FD", marginBottom: "4px" }}>
+                                        {t("account.register")}
+                                    </h4>
+                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                        {t("account.registerDesc")}
+                                    </p>
                                 </div>
                             </div>
-                            <div className="flex gap-4">
-                                <CheckCircle size={20} className="text-blue-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex gap-3">
+                                <CheckCircle size={18} style={{ color: "#60A5FA", flexShrink: 0, marginTop: "2px" }} />
                                 <div>
-                                    <h4 className="font-semibold text-blue-200 mb-1">{t("account.login")}</h4>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{t("account.loginDesc")}</p>
+                                    <h4 style={{ fontWeight: "600", color: "#93C5FD", marginBottom: "4px" }}>
+                                        {t("account.login")}
+                                    </h4>
+                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                        {t("account.loginDesc")}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* How to Rent */}
-                    <section className="bg-[#12121e] rounded-2xl border border-white/5 overflow-hidden">
-                        <div className="bg-gradient-to-r from-pink-600/20 to-pink-900/20 px-6 py-4 border-b border-white/5">
+                    <section
+                        style={{
+                            backgroundColor: "#12121e",
+                            borderRadius: "16px",
+                            border: "1px solid rgba(255,255,255,0.05)",
+                            overflow: "hidden"
+                        }}
+                    >
+                        <div
+                            style={{
+                                background: "linear-gradient(90deg, rgba(236,72,153,0.2), rgba(236,72,153,0.05))",
+                                padding: "16px 20px",
+                                borderBottom: "1px solid rgba(255,255,255,0.05)"
+                            }}
+                        >
                             <div className="flex items-center gap-3">
-                                <div className="p-2 bg-pink-500/20 rounded-lg">
-                                    <ShoppingBag size={20} className="text-pink-400" />
+                                <div style={{ padding: "8px", backgroundColor: "rgba(236,72,153,0.2)", borderRadius: "8px" }}>
+                                    <ShoppingBag size={20} style={{ color: "#F472B6" }} />
                                 </div>
-                                <h3 className="text-lg font-bold text-white">{t("booking.title")}</h3>
+                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
+                                    {t("booking.title")}
+                                </h3>
                             </div>
                         </div>
-                        <div className="p-6 space-y-5">
+                        <div style={{ padding: "20px" }}>
                             {[1, 2, 3].map((num) => (
-                                <div key={num} className="flex gap-4">
-                                    <div className="w-6 h-6 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                                <div key={num} className="flex gap-3" style={{ marginBottom: num < 3 ? "16px" : 0 }}>
+                                    <div
+                                        style={{
+                                            width: "24px",
+                                            height: "24px",
+                                            borderRadius: "50%",
+                                            backgroundColor: "rgba(236,72,153,0.2)",
+                                            color: "#F472B6",
+                                            fontSize: "12px",
+                                            fontWeight: "bold",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            flexShrink: 0,
+                                            marginTop: "2px"
+                                        }}
+                                    >
                                         {num}
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-pink-200 mb-1">{t(`booking.step${num}`)}</h4>
-                                        <p className="text-sm text-gray-400 leading-relaxed">{t(`booking.step${num}Desc`)}</p>
+                                        <h4 style={{ fontWeight: "600", color: "#FBCFE8", marginBottom: "4px" }}>
+                                            {t(`booking.step${num}`)}
+                                        </h4>
+                                        <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                            {t(`booking.step${num}Desc`)}
+                                        </p>
                                     </div>
                                 </div>
                             ))}
@@ -189,58 +336,108 @@ export default function GuidePage() {
                     </section>
 
                     {/* Payments & Verification */}
-                    <section className="bg-[#12121e] rounded-2xl border border-white/5 overflow-hidden">
-                        <div className="bg-gradient-to-r from-green-600/20 to-green-900/20 px-6 py-4 border-b border-white/5">
+                    <section
+                        style={{
+                            backgroundColor: "#12121e",
+                            borderRadius: "16px",
+                            border: "1px solid rgba(255,255,255,0.05)",
+                            overflow: "hidden"
+                        }}
+                    >
+                        <div
+                            style={{
+                                background: "linear-gradient(90deg, rgba(34,197,94,0.2), rgba(34,197,94,0.05))",
+                                padding: "16px 20px",
+                                borderBottom: "1px solid rgba(255,255,255,0.05)"
+                            }}
+                        >
                             <div className="flex items-center gap-3">
-                                <div className="p-2 bg-green-500/20 rounded-lg">
-                                    <Wallet size={20} className="text-green-400" />
+                                <div style={{ padding: "8px", backgroundColor: "rgba(34,197,94,0.2)", borderRadius: "8px" }}>
+                                    <Wallet size={20} style={{ color: "#4ADE80" }} />
                                 </div>
-                                <h3 className="text-lg font-bold text-white">{t("payment.title")}</h3>
+                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
+                                    {t("payment.title")}
+                                </h3>
                             </div>
                         </div>
-                        <div className="p-6 space-y-5">
-                            <p className="text-sm text-gray-400">{t("payment.instruction")}</p>
-                            <div className="flex gap-4">
-                                <CreditCard size={20} className="text-green-400 flex-shrink-0 mt-0.5" />
+                        <div style={{ padding: "20px" }}>
+                            <p style={{ fontSize: "14px", color: "#9CA3AF", marginBottom: "16px" }}>
+                                {t("payment.instruction")}
+                            </p>
+                            <div className="flex gap-3 mb-4">
+                                <CreditCard size={18} style={{ color: "#4ADE80", flexShrink: 0, marginTop: "2px" }} />
                                 <div>
-                                    <h4 className="font-semibold text-green-200 mb-1">{t("payment.bank")}</h4>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{t("payment.bankDesc")}</p>
+                                    <h4 style={{ fontWeight: "600", color: "#86EFAC", marginBottom: "4px" }}>
+                                        {t("payment.bank")}
+                                    </h4>
+                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                        {t("payment.bankDesc")}
+                                    </p>
                                 </div>
                             </div>
-                            <div className="flex gap-4">
-                                <Upload size={20} className="text-green-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex gap-3">
+                                <Upload size={18} style={{ color: "#4ADE80", flexShrink: 0, marginTop: "2px" }} />
                                 <div>
-                                    <h4 className="font-semibold text-green-200 mb-1">{t("payment.proof")}</h4>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{t("payment.proofDesc")}</p>
+                                    <h4 style={{ fontWeight: "600", color: "#86EFAC", marginBottom: "4px" }}>
+                                        {t("payment.proof")}
+                                    </h4>
+                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                        {t("payment.proofDesc")}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     {/* Customer Dashboard */}
-                    <section className="bg-[#12121e] rounded-2xl border border-white/5 overflow-hidden">
-                        <div className="bg-gradient-to-r from-amber-600/20 to-amber-900/20 px-6 py-4 border-b border-white/5">
+                    <section
+                        style={{
+                            backgroundColor: "#12121e",
+                            borderRadius: "16px",
+                            border: "1px solid rgba(255,255,255,0.05)",
+                            overflow: "hidden"
+                        }}
+                    >
+                        <div
+                            style={{
+                                background: "linear-gradient(90deg, rgba(251,191,36,0.2), rgba(251,191,36,0.05))",
+                                padding: "16px 20px",
+                                borderBottom: "1px solid rgba(255,255,255,0.05)"
+                            }}
+                        >
                             <div className="flex items-center gap-3">
-                                <div className="p-2 bg-amber-500/20 rounded-lg">
-                                    <LayoutDashboard size={20} className="text-amber-400" />
+                                <div style={{ padding: "8px", backgroundColor: "rgba(251,191,36,0.2)", borderRadius: "8px" }}>
+                                    <LayoutDashboard size={20} style={{ color: "#FBBF24" }} />
                                 </div>
-                                <h3 className="text-lg font-bold text-white">{t("dashboard.title")}</h3>
+                                <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white" }}>
+                                    {t("dashboard.title")}
+                                </h3>
                             </div>
                         </div>
-                        <div className="p-6 space-y-5">
-                            <p className="text-sm text-gray-400">{t("dashboard.overview")}</p>
-                            <div className="flex gap-4">
-                                <Clock size={20} className="text-amber-400 flex-shrink-0 mt-0.5" />
+                        <div style={{ padding: "20px" }}>
+                            <p style={{ fontSize: "14px", color: "#9CA3AF", marginBottom: "16px" }}>
+                                {t("dashboard.overview")}
+                            </p>
+                            <div className="flex gap-3 mb-4">
+                                <Clock size={18} style={{ color: "#FBBF24", flexShrink: 0, marginTop: "2px" }} />
                                 <div>
-                                    <h4 className="font-semibold text-amber-200 mb-1">{t("dashboard.myRentals")}</h4>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{t("dashboard.myRentalsDesc")}</p>
+                                    <h4 style={{ fontWeight: "600", color: "#FDE68A", marginBottom: "4px" }}>
+                                        {t("dashboard.myRentals")}
+                                    </h4>
+                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                        {t("dashboard.myRentalsDesc")}
+                                    </p>
                                 </div>
                             </div>
-                            <div className="flex gap-4">
-                                <Receipt size={20} className="text-amber-400 flex-shrink-0 mt-0.5" />
+                            <div className="flex gap-3">
+                                <Receipt size={18} style={{ color: "#FBBF24", flexShrink: 0, marginTop: "2px" }} />
                                 <div>
-                                    <h4 className="font-semibold text-amber-200 mb-1">{t("dashboard.receipts")}</h4>
-                                    <p className="text-sm text-gray-400 leading-relaxed">{t("dashboard.receiptsDesc")}</p>
+                                    <h4 style={{ fontWeight: "600", color: "#FDE68A", marginBottom: "4px" }}>
+                                        {t("dashboard.receipts")}
+                                    </h4>
+                                    <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                        {t("dashboard.receiptsDesc")}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -248,27 +445,47 @@ export default function GuidePage() {
                 </div>
 
                 {/* ----- GLOSSARY OF TERMS ----- */}
-                <section>
+                <section className="mb-16">
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="p-3 bg-emerald-500/20 rounded-xl">
-                            <BookOpen size={24} className="text-emerald-400" />
+                        <div style={{ padding: "12px", backgroundColor: "rgba(16,185,129,0.2)", borderRadius: "12px" }}>
+                            <BookOpen size={24} style={{ color: "#34D399" }} />
                         </div>
                         <div>
-                            <h2 className="text-2xl font-bold text-white">{t("glossary.title")}</h2>
-                            <p className="text-gray-400 text-sm">Important terms you should know</p>
+                            <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "white" }}>
+                                {t("glossary.title")}
+                            </h2>
+                            <p style={{ fontSize: "14px", color: "#9CA3AF" }}>Important terms you should know</p>
                         </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                            gap: "16px"
+                        }}
+                    >
                         {glossaryTerms.map((item, idx) => (
-                            <div key={idx} className="bg-[#12121e] border border-white/5 rounded-xl p-5 hover:border-emerald-500/30 transition-colors group">
-                                <div className="flex gap-4">
-                                    <div className="p-2 bg-emerald-500/10 rounded-lg h-fit group-hover:bg-emerald-500/20 transition-colors">
-                                        <item.icon size={18} className="text-emerald-400" />
+                            <div
+                                key={idx}
+                                style={{
+                                    backgroundColor: "#12121e",
+                                    border: "1px solid rgba(255,255,255,0.05)",
+                                    borderRadius: "12px",
+                                    padding: "20px"
+                                }}
+                            >
+                                <div className="flex gap-3">
+                                    <div style={{ padding: "8px", backgroundColor: "rgba(16,185,129,0.1)", borderRadius: "8px", height: "fit-content" }}>
+                                        <item.icon size={16} style={{ color: "#34D399" }} />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-emerald-100 mb-1">{item.term}</h4>
-                                        <p className="text-sm text-gray-400 leading-relaxed">{item.def}</p>
+                                        <h4 style={{ fontWeight: "bold", color: "#A7F3D0", marginBottom: "6px" }}>
+                                            {item.term}
+                                        </h4>
+                                        <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                            {item.def}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -277,23 +494,59 @@ export default function GuidePage() {
                 </section>
 
                 {/* ----- FAQ SECTION ----- */}
-                <section className="bg-[#12121e] rounded-2xl border border-white/5 p-8 md:p-10">
+                <section
+                    className="mb-16"
+                    style={{
+                        backgroundColor: "#12121e",
+                        borderRadius: "16px",
+                        border: "1px solid rgba(255,255,255,0.05)",
+                        padding: "32px 24px"
+                    }}
+                >
                     <div className="text-center mb-10">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-yellow-500/10 text-yellow-400 mb-4">
-                            <HelpCircle size={24} />
+                        <div
+                            style={{
+                                width: "48px",
+                                height: "48px",
+                                borderRadius: "50%",
+                                backgroundColor: "rgba(234,179,8,0.1)",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                margin: "0 auto 16px auto"
+                            }}
+                        >
+                            <HelpCircle size={24} style={{ color: "#EAB308" }} />
                         </div>
-                        <h2 className="text-2xl font-bold text-white mb-2">{t("faq.title")}</h2>
-                        <p className="text-gray-400 text-sm">Quick answers to common questions</p>
+                        <h2 style={{ fontSize: "24px", fontWeight: "bold", color: "white", marginBottom: "8px" }}>
+                            {t("faq.title")}
+                        </h2>
+                        <p style={{ fontSize: "14px", color: "#9CA3AF" }}>Quick answers to common questions</p>
                     </div>
 
-                    <div className="max-w-3xl mx-auto space-y-4">
+                    <div style={{ maxWidth: "700px", margin: "0 auto" }}>
                         {faqItems.map((item, idx) => (
-                            <div key={idx} className="bg-[#0a0a12] border border-white/5 rounded-xl p-6 hover:border-yellow-500/20 transition-colors">
-                                <div className="flex gap-4">
-                                    <div className="text-yellow-500 font-mono font-bold text-sm mt-0.5">Q{idx + 1}</div>
+                            <div
+                                key={idx}
+                                style={{
+                                    backgroundColor: "#0a0a12",
+                                    border: "1px solid rgba(255,255,255,0.05)",
+                                    borderRadius: "12px",
+                                    padding: "20px",
+                                    marginBottom: idx < faqItems.length - 1 ? "12px" : 0
+                                }}
+                            >
+                                <div className="flex gap-3">
+                                    <span style={{ color: "#EAB308", fontWeight: "bold", fontSize: "14px" }}>
+                                        Q{idx + 1}
+                                    </span>
                                     <div>
-                                        <h4 className="font-semibold text-white mb-2">{item.q}</h4>
-                                        <p className="text-gray-400 text-sm leading-relaxed">{item.a}</p>
+                                        <h4 style={{ fontWeight: "600", color: "white", marginBottom: "8px" }}>
+                                            {item.q}
+                                        </h4>
+                                        <p style={{ fontSize: "14px", color: "#9CA3AF", lineHeight: "1.6" }}>
+                                            {item.a}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -302,51 +555,90 @@ export default function GuidePage() {
                 </section>
 
                 {/* ----- IMPORTANT NOTES ----- */}
-                <section className="bg-gradient-to-r from-red-900/20 to-orange-900/20 rounded-2xl p-8 border border-red-500/20">
+                <section
+                    className="mb-16"
+                    style={{
+                        background: "linear-gradient(135deg, rgba(239,68,68,0.15), rgba(249,115,22,0.1))",
+                        borderRadius: "16px",
+                        padding: "24px",
+                        border: "1px solid rgba(239,68,68,0.2)"
+                    }}
+                >
                     <div className="flex items-start gap-4">
-                        <div className="p-3 bg-red-500/20 rounded-xl text-red-400 flex-shrink-0">
-                            <AlertCircle size={24} />
+                        <div
+                            style={{
+                                padding: "12px",
+                                backgroundColor: "rgba(239,68,68,0.2)",
+                                borderRadius: "12px",
+                                flexShrink: 0
+                            }}
+                        >
+                            <AlertCircle size={24} style={{ color: "#F87171" }} />
                         </div>
                         <div>
-                            <h3 className="text-lg font-bold text-white mb-3">Important Reminders</h3>
-                            <ul className="space-y-2 text-sm text-gray-300">
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">•</span>
-                                    <span>Always return costumes in clean, good condition to get your full deposit back.</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">•</span>
-                                    <span>Late returns incur additional fees. Please return on or before your rental end date.</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">•</span>
-                                    <span>Report any damage immediately to avoid penalties.</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">•</span>
-                                    <span>Keep your payment proof until your deposit is refunded.</span>
-                                </li>
+                            <h3 style={{ fontSize: "18px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>
+                                Important Reminders
+                            </h3>
+                            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                                {[
+                                    "Always return costumes in clean, good condition to get your full deposit back.",
+                                    "Late returns incur additional fees. Please return on or before your rental end date.",
+                                    "Report any damage immediately to avoid penalties.",
+                                    "Keep your payment proof until your deposit is refunded."
+                                ].map((text, i) => (
+                                    <li
+                                        key={i}
+                                        className="flex items-start gap-2"
+                                        style={{ marginBottom: i < 3 ? "8px" : 0 }}
+                                    >
+                                        <span style={{ color: "#F87171", marginTop: "4px" }}>•</span>
+                                        <span style={{ fontSize: "14px", color: "#D1D5DB", lineHeight: "1.6" }}>
+                                            {text}
+                                        </span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
                 </section>
 
                 {/* ----- CTA SECTION ----- */}
-                <section className="text-center py-8">
-                    <h3 className="text-2xl font-bold text-white mb-4">Ready to start your cosplay journey?</h3>
-                    <p className="text-gray-400 mb-8">Browse our collection and find your perfect costume today!</p>
+                <section className="text-center" style={{ paddingTop: "24px" }}>
+                    <h3 style={{ fontSize: "24px", fontWeight: "bold", color: "white", marginBottom: "12px" }}>
+                        Ready to start your cosplay journey?
+                    </h3>
+                    <p style={{ color: "#9CA3AF", marginBottom: "24px" }}>
+                        Browse our collection and find your perfect costume today!
+                    </p>
 
                     <div className="flex flex-wrap justify-center gap-4">
                         <Link
                             href="/products"
-                            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:-translate-y-0.5"
+                            className="inline-flex items-center gap-2"
+                            style={{
+                                padding: "14px 28px",
+                                borderRadius: "9999px",
+                                background: "linear-gradient(90deg, #9370DB, #EC4899)",
+                                color: "white",
+                                fontWeight: "bold",
+                                textDecoration: "none"
+                            }}
                         >
                             Browse Costumes
                             <ArrowRight size={18} />
                         </Link>
                         <Link
                             href="/register"
-                            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 border border-white/20 text-white font-bold hover:bg-white/20 transition-all"
+                            className="inline-flex items-center gap-2"
+                            style={{
+                                padding: "14px 28px",
+                                borderRadius: "9999px",
+                                backgroundColor: "rgba(255,255,255,0.1)",
+                                border: "1px solid rgba(255,255,255,0.2)",
+                                color: "white",
+                                fontWeight: "bold",
+                                textDecoration: "none"
+                            }}
                         >
                             Create Account
                         </Link>
@@ -356,10 +648,16 @@ export default function GuidePage() {
             </main>
 
             {/* ===== FOOTER NOTE ===== */}
-            <footer className="border-t border-white/5 py-8 text-center">
-                <p className="text-sm text-gray-500">
+            <footer
+                className="text-center"
+                style={{
+                    borderTop: "1px solid rgba(255,255,255,0.05)",
+                    padding: "24px"
+                }}
+            >
+                <p style={{ fontSize: "14px", color: "#6B7280" }}>
                     Need help? Contact us at{" "}
-                    <a href="mailto:support@clovercosplay.com" className="text-purple-400 hover:underline">
+                    <a href="mailto:support@clovercosplay.com" style={{ color: "#9370DB" }}>
                         support@clovercosplay.com
                     </a>
                 </p>
