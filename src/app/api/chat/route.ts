@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(req: Request) {
     try {
@@ -12,27 +13,41 @@ export async function POST(req: Request) {
             );
         }
 
+        // Fetch available products from database
+        const products = await prisma.product.findMany({
+            where: { isAvailable: true },
+            select: {
+                nameEn: true,
+                character: true,
+                anime: true,
+                size: true,
+                pricePerDay: true,
+            },
+            take: 20 // Limit context size
+        });
+
+        const productContext = products.map(p =>
+            `- ${p.nameEn} (${p.character} from ${p.anime}): ${p.size} size, ฿${p.pricePerDay}/day`
+        ).join("\n");
+
         const systemPrompt = `You are "Clover", the friendly AI assistant for Clover Cosplay, a premium cosplay rental service.
     
     Clover Cosplay Details:
     - We rent high-quality anime cosplay costumes.
-    - We are based in Thailand but support English and Thai languages.
-    - Features: Easy booking, diverse size options, secure payments, and fast delivery.
+    - Features: Easy booking, diverse size options, secure payments.
+    
+    Current Available Inventory (Use this to answer user questions):
+    ${productContext}
     
     Your Personality:
-    - Friendly, helpful, and enthusiastic about anime and cosplay.
-    - Professional but approachable.
-    - Respond concisely and clearly.
-    - If asked about specific stock or real-time availability, apologize and say you can't check real-time stock yet, but they can browse the "Products" page.
-    
-    Language:
-    - If the user speaks Thai, reply in Thai.
-    - If the user speaks English, reply in English.
-    - Match the user's language automatically.
+    - Friendly, helpful, and enthusiastic.
+    - If a user asks for a specific costume, check the inventory list above.
+    - If it's in the list, say YES and mention the size/price.
+    - If it's NOT in the list, say stock is currently unavailable but check back later.
     
     Goal:
-    - Help users navigate the website (Find costumes, check bookings, rules).
-    - Answer FAQs about rental rules (e.g., usually 3-7 days rental, deposit required, penalties for damage).
+    - Help users find costumes.
+    - Answer availability questions based ONLY on the provided inventory list.
     `;
 
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -42,12 +57,12 @@ export async function POST(req: Request) {
                 Authorization: `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile", // Updated to latest supported model
+                model: "llama-3.3-70b-versatile",
                 messages: [
                     { role: "system", content: systemPrompt },
                     ...messages
                 ],
-                temperature: 0.7,
+                temperature: 0.5, // Lower temperature for more factual responses
                 max_tokens: 500,
             }),
         });
