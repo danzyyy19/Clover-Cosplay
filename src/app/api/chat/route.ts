@@ -42,7 +42,7 @@ export async function POST(req: Request) {
                 Authorization: `Bearer ${apiKey}`,
             },
             body: JSON.stringify({
-                model: "llama3-70b-8192", // High quality, fast model
+                model: "llama3-8b-8192", // Changed to 8b model for better stability
                 messages: [
                     { role: "system", content: systemPrompt },
                     ...messages
@@ -54,8 +54,8 @@ export async function POST(req: Request) {
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error("Groq API Error:", errorText);
-            return NextResponse.json({ error: "Failed to fetch response from AI" }, { status: response.status });
+            console.error("Groq API Error Details:", errorText);
+            return NextResponse.json({ error: `Groq Error: ${errorText}` }, { status: response.status });
         }
 
         const data = await response.json();

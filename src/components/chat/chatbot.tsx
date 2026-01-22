@@ -53,7 +53,11 @@ export function Chatbot() {
                 body: JSON.stringify({ messages: newMessages }),
             });
 
-            if (!res.ok) throw new Error("Failed to fetch");
+            if (!res.ok) {
+                const errorData = await res.json().catch(() => ({}));
+                console.error("Server responded with error:", errorData);
+                throw new Error(errorData.error || "Failed to fetch");
+            }
 
             const data = await res.json();
             setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
@@ -61,7 +65,7 @@ export function Chatbot() {
             console.error("Chat error:", error);
             setMessages((prev) => [
                 ...prev,
-                { role: "assistant", content: locale === "th" ? "ขออภัย ระบบขัดข้องชั่วคราว ลองใหม่ภายหลังนะครับ" : "Sorry, something went wrong. Please try again later." }
+                { role: "assistant", content: locale === "th" ? "ขออภัย มีปัญหาในการเชื่อมต่อ (Cek Console untuk detail error)" : "Sorry, connection error. Please check console for details." }
             ]);
         } finally {
             setIsLoading(false);
