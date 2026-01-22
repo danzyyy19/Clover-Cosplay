@@ -34,6 +34,9 @@ export function Footer() {
                         <Link href={`/${locale}/rules`} style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "12px" }}>
                             {locale === "th" ? "กฎการเช่า" : "Rental Rules"}
                         </Link>
+                        <Link href={`/${locale}/guide`} style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "12px" }}>
+                            {locale === "th" ? "คู่มือการใช้งาน" : "User Guide"}
+                        </Link>
                         <Link href={`/${locale}/login`} style={{ color: "var(--text-secondary)", textDecoration: "none", fontSize: "12px" }}>
                             {locale === "th" ? "เข้าสู่ระบบ" : "Login"}
                         </Link>
