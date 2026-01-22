@@ -170,6 +170,34 @@
             "a2": "Late returns incur a fee of 50% of the daily rental price for the first 3 days.",
             "q3": "Is the deposit refundable?",
             "a3": "Yes, the deposit is fully refundable upon returning the costume in good condition."
+        },
+        "glossary": {
+            "title": "Glossary of Terms",
+            "deposit": {
+                "term": "Deposit (Mัดจำ)",
+                "def": "A refundable fee paid upfront to ensure the costume is returned in good condition."
+            },
+            "rentalPeriod": {
+                "term": "Rental Period",
+                "def": "The duration you keep the costume. Minimum 1 day. Late returns incur fees."
+            },
+            "verification": {
+                "term": "Identity Verification",
+                "def": "The process of submitting your ID card/Passport to confirm your identity before renting."
+            },
+            "proof": {
+                "term": "Payment Proof",
+                "def": "A screenshot or photo of your bank transfer slip used to confirm your payment."
+            }
+        },
+        "flowchart": {
+            "title": "Booking Process Flow",
+            "step1": "Browse",
+            "step2": "Book",
+            "step3": "Pay",
+            "step4": "Verify",
+            "step5": "Pickup",
+            "step6": "Return"
         }
     }
 }
