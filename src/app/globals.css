@@ -1,0 +1,514 @@
+@import "tailwindcss";
+@import "./styles/toast.css";
+
+@theme {
+  /* Brand Colors - generates utilities like bg-clover-mint, text-clover-purple etc */
+  --color-clover-mint: #7FFFD4;
+  --color-clover-teal: #40E0D0;
+  --color-clover-pink: #FFB6C1;
+  --color-clover-lavender: #DDA0DD;
+  --color-clover-purple: #9370DB;
+  --color-clover-violet: #8A2BE2;
+  --color-clover-yellow: #F0E68C;
+  --color-clover-lime: #98FB98;
+
+  /* Dark theme colors */
+  --color-dark-bg: #0D0D1A;
+  --color-dark-surface: #1A1A2E;
+  --color-dark-accent: #16213E;
+  --color-dark-border: #2D2D44;
+  --color-dark-text: #E8E8F0;
+  --color-dark-muted: #9CA3AF;
+
+  /* Light theme colors */
+  --color-light-bg: #FEFEFE;
+  --color-light-surface: #F8F9FA;
+  --color-light-accent: #F0F4F8;
+  --color-light-border: #E5E7EB;
+  --color-light-text: #1F2937;
+  --color-light-muted: #6B7280;
+}
+
+/* CSS Variables for theming (changes based on light/dark) */
+:root {
+  --bg-primary: var(--color-light-bg);
+  --bg-secondary: var(--color-light-surface);
+  --bg-card: #FFFFFF;
+  --border-color: var(--color-light-border);
+  --text-primary: var(--color-light-text);
+  --text-secondary: var(--color-light-muted);
+
+  /* Glass backgrounds */
+  --glass-layout: rgba(255, 255, 255, 0.6);
+  --glass-sidebar: rgba(255, 255, 255, 0.8);
+}
+
+.dark {
+  --bg-primary: var(--color-dark-bg);
+  --bg-secondary: var(--color-dark-surface);
+  --bg-card: var(--color-dark-surface);
+  --border-color: var(--color-dark-border);
+  --text-primary: var(--color-dark-text);
+  --text-secondary: var(--color-dark-muted);
+
+  /* Glass backgrounds */
+  --glass-layout: rgba(10, 10, 20, 0.4);
+  --glass-sidebar: rgba(15, 15, 20, 0.6);
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  background-image: url('/images/anime-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  /* Smooth transition for theme change */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Glassmorphism Overlay for Body */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  /* Light overlay mainly */
+  z-index: -1;
+  backdrop-filter: blur(2px);
+}
+
+.dark body::before {
+  background: rgba(13, 13, 26, 0.85);
+  /* Dark overlay */
+}
+
+/* Gradient text utility */
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-clover-mint), var(--color-clover-lavender), var(--color-clover-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Float animation for particles */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.3;
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.6;
+  }
+}
+
+/* Button styles */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--color-clover-purple), var(--color-clover-violet));
+  color: white;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(147, 112, 219, 0.4);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-clover-lavender);
+  background-color: var(--bg-secondary);
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================
+   MOBILE-FIRST RESPONSIVE STYLES
+   ========================================== */
+
+/* Mobile-first: Hide desktop nav links by default */
+.desktop-nav {
+  display: none !important;
+}
+
+/* Mobile menu button visible by default */
+.mobile-menu-btn {
+  display: flex !important;
+}
+
+/* Desktop-only elements hidden on mobile */
+.desktop-only {
+  display: none !important;
+}
+
+/* Mobile-only elements visible by default */
+.mobile-only {
+  display: flex !important;
+}
+
+/* Tablet and above (768px+) */
+@media (min-width: 768px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: flex !important;
+  }
+
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* Responsive typography */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Responsive containers */
+.container {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Mobile button adjustments */
+.btn-primary,
+.btn-outline {
+  padding: 10px 18px;
+  font-size: 13px;
+}
+
+@media (min-width: 768px) {
+
+  .btn-primary,
+  .btn-outline {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+/* Responsive grid utilities */
+.responsive-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Spin animation for loading states */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Product Detail Grid - Desktop Side-by-Side */
+/* Product Detail Grid - Desktop Side-by-Side */
+.responsive-product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .responsive-product-grid {
+    grid-template-columns: 40% 1fr;
+    /* 40% image, rest content */
+    gap: 40px;
+    align-items: start;
+  }
+}
+
+/* Admin Product Form Grid */
+.admin-product-grid {
+  display: flex;
+  flex-direction: column;
+  /* Stack on mobile */
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .admin-product-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    /* 2/3 Main, 1/3 Sidebar */
+    gap: 30px;
+    /* More gap */
+  }
+}
+
+/* ==========================================
+   Responsive Table (Card View on Mobile)
+   ========================================== */
+@media (max-width: 768px) {
+  .responsive-table {
+    display: block;
+  }
+
+  .responsive-table thead {
+    display: none;
+    /* Hide headers */
+  }
+
+  .responsive-table tbody {
+    display: block;
+  }
+
+  .responsive-table tr {
+    display: block;
+    margin-bottom: 16px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .responsive-table td {
+    display: flex;
+    /* Flex to align label and content */
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    text-align: right;
+    /* Content aligns right */
+  }
+
+  .responsive-table td:last-child {
+    border-bottom: none;
+  }
+
+  .responsive-table td::before {
+    content: attr(data-label);
+    /* Use data-label attribute for header */
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: left;
+    margin-right: 16px;
+    flex-shrink: 0;
+    /* Prevent label from shrinking */
+  }
+
+  /* Specific adjustments for action details or images */
+  .responsive-table td img {
+    margin-left: auto;
+    /* Push image to right */
+  }
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+/* Admin Detail Page Layout */
+.admin-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .admin-detail-grid {
+    grid-template-columns: 1fr 300px;
+  }
+}
+
+.booking-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .booking-detail-grid {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+.admin-order-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .admin-order-detail-grid {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* Form Row Responsive (Stack on mobile, 2 cols on desktop) */
+.form-row-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .form-row-responsive {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}

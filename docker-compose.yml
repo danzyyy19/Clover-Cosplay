@@ -1,0 +1,42 @@
+services:
+  # Next.js App Service
+  app:
+    build: .
+    container_name: clover_app
+    ports:
+      - "3000:3000"
+    # Load environment variables from your local .env file
+    # This ensures Cloudinary, Groq, and NextAuth keys are loaded
+    env_file:
+      - .env
+    # We override DATABASE_URL here to point to the LOCAL container db
+    # If you want to use the Aiven Cloud DB, comment out the DATABASE_URL line below
+    environment:
+      # - DATABASE_URL=mysql://root:root@db:3306/clover_db # Commented out to use .env (Cloud DB)
+      - NEXTAUTH_URL=http://localhost:3000
+      - WATCHPACK_POLLING=true # Required for Hot Reload on Windows
+    volumes:
+      - .:/app
+      - /app/node_modules # Use container's node_modules, not host's
+      - /app/.next # Use container's build folder
+    depends_on:
+      - db
+    # Override standard start command to run migrations if needed later, 
+    # but for now standard dev is fine. 
+    command: sh -c "npx prisma generate && npm run dev"
+
+  # MySQL Database Service
+  db:
+    image: mysql:8
+    container_name: clover_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clover_db
+    ports:
+      - "3306:3306" # Expose to host if you want to connect via Workbench/DBeaver
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

@@ -1,0 +1,203 @@
+{
+    "nav": {
+        "home": "Home",
+        "products": "Products",
+        "rules": "Rules",
+        "login": "Login",
+        "logout": "Logout",
+        "dashboard": "Dashboard",
+        "profile": "Profile"
+    },
+    "common": {
+        "search": "Search",
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "add": "Add",
+        "back": "Back",
+        "next": "Next",
+        "previous": "Previous",
+        "close": "Close",
+        "confirm": "Confirm",
+        "yes": "Yes",
+        "no": "No"
+    },
+    "home": {
+        "welcome": "Welcome to",
+        "subtitle": "Your Premier Cosplay Costume Rental Service. High-quality costumes at affordable prices.",
+        "browseCostumes": "Browse Costumes",
+        "howToRent": "How to Rent",
+        "howItWorks": "How It Works",
+        "stepsSubtitle": "Rent your cosplay costume in 4 simple steps",
+        "ctaTitle": "Ready to become your dream character?",
+        "ctaSubtitle": "Join us today and start your cosplay adventure",
+        "getStarted": "Get Started"
+    },
+    "steps": {
+        "chooseCostume": "Choose Costume",
+        "chooseCostumeDesc": "Browse and pick your favorite",
+        "bookPay": "Book & Pay",
+        "bookPayDesc": "Select dates and complete payment",
+        "pickUp": "Pick Up",
+        "pickUpDesc": "Come to our store with receipt",
+        "return": "Return",
+        "returnDesc": "Return the costume on time"
+    },
+    "products": {
+        "title": "Products",
+        "allCategories": "All Categories",
+        "search": "Search costumes...",
+        "noProducts": "No products found",
+        "addToCart": "Add to Cart",
+        "viewDetails": "View Details",
+        "price": "Price",
+        "category": "Category",
+        "inStock": "In Stock",
+        "outOfStock": "Out of Stock",
+        "perDay": "/day",
+        "rentNow": "Rent Now"
+    },
+    "rules": {
+        "title": "Rental Rules & Terms",
+        "subtitle": "Please read our rental rules and terms carefully before booking",
+        "mainRules": "Rental Rules",
+        "identityVerification": "Identity Verification",
+        "identityVerificationDesc": "Valid ID card or passport is required for all rentals. We will take a photo for security purposes.",
+        "depositRequired": "Deposit Required",
+        "depositRequiredDesc": "A deposit of 50% of the costume value is required. This will be refunded upon return of the costume in good condition.",
+        "rentalPeriod": "Rental Period",
+        "rentalPeriodDesc": "Minimum rental period is 1 day. Return by 6:00 PM on the due date to avoid late fees.",
+        "costumeCare": "Costume Care",
+        "costumeCareDesc": "Do not wash the costume. Return in the same condition as received. Minor wear is acceptable.",
+        "cancellationPolicy": "Cancellation Policy",
+        "timing": "Timing",
+        "refund": "Refund",
+        "lateFees": "Late Return Fees",
+        "lateFeesWarning": "Please return costumes on time to avoid late fees",
+        "agreement": "By booking a costume, you agree to all the rules and terms above",
+        "contact": "If you have any questions, please contact us before booking"
+    },
+    "auth": {
+        "login": "Login",
+        "register": "Register",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "name": "Full Name",
+        "phone": "Phone Number",
+        "forgotPassword": "Forgot Password?",
+        "noAccount": "Don't have an account?",
+        "hasAccount": "Already have an account?",
+        "signUp": "Sign Up",
+        "signIn": "Sign In",
+        "loginSuccess": "Login successful",
+        "registerSuccess": "Registration successful",
+        "invalidCredentials": "Invalid email or password"
+    },
+    "footer": {
+        "copyright": "© 2024 Clover Cosplay. All rights reserved.",
+        "followUs": "Follow Us",
+        "quickLinks": "Quick Links",
+        "contactUs": "Contact Us",
+        "description": "Premium cosplay costume rental service in Thailand"
+    },
+    "customer": {
+        "dashboard": "Dashboard",
+        "myRentals": "My Rentals",
+        "history": "History",
+        "profile": "Profile",
+        "settings": "Settings"
+    },
+    "admin": {
+        "dashboard": "Dashboard",
+        "products": "Products",
+        "orders": "Orders",
+        "customers": "Customers",
+        "settings": "Settings",
+        "addProduct": "Add Product",
+        "editProduct": "Edit Product"
+    },
+    "guide": {
+        "title": "User Manual",
+        "subtitle": "Everything you need to know about using Clover Cosplay",
+        "toc": "Table of Contents",
+        "intro": {
+            "title": "Introduction",
+            "content": "Welcome to Clover Cosplay! We are a premium cosplay costume rental service dedicated to bringing your favorite characters to life. This manual will guide you through all the features of our platform."
+        },
+        "account": {
+            "title": "Getting Started",
+            "register": "Registration",
+            "registerDesc": "To rent a costume, you must first create an account. Click 'Register' at the top right, fill in your name, email, and password.",
+            "login": "Logging In",
+            "loginDesc": "Access your account by clicking 'Login' and entering your registered email and password."
+        },
+        "booking": {
+            "title": "How to Rent",
+            "step1": "1. Find Your Costume",
+            "step1Desc": "Use the 'Products' page to browse our collection. You can search by character name, anime title, or filter by category.",
+            "step2": "2. Check Availability",
+            "step2Desc": "On the product page, check the calendar to see if the costume is available for your desired dates.",
+            "step3": "3. Place Booking",
+            "step3Desc": "Select your start and end dates. The system will calculate the total price including deposit. Click 'Rent Now' to proceed."
+        },
+        "payment": {
+            "title": "Payments & Verification",
+            "instruction": "After booking, you will be redirected to the payment page.",
+            "bank": "Bank Transfer",
+            "bankDesc": "Transfer the total amount to our bank account displayed on the screen.",
+            "proof": "Upload Proof",
+            "proofDesc": "Take a screenshot of your transfer slip and upload it via the 'Upload Payment Proof' button. Our admin will verify it within 24 hours."
+        },
+        "dashboard": {
+            "title": "Customer Dashboard",
+            "overview": "Your personal command center.",
+            "myRentals": "My Rentals",
+            "myRentalsDesc": "Track the status of all your bookings (Pending, Approved, Active, Completed).",
+            "receipts": "Receipts",
+            "receiptsDesc": "Once a booking is approved, you can download an official receipt directly from the booking details page."
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "q1": "Can I cancel my booking?",
+            "a1": "Yes, you can cancel up to 7 days before the rental date for a full refund.",
+            "q2": "What happens if I return late?",
+            "a2": "Late returns incur a fee of 50% of the daily rental price for the first 3 days.",
+            "q3": "Is the deposit refundable?",
+            "a3": "Yes, the deposit is fully refundable upon returning the costume in good condition."
+        },
+        "glossary": {
+            "title": "Glossary of Terms",
+            "deposit": {
+                "term": "Deposit (Mัดจำ)",
+                "def": "A refundable fee paid upfront to ensure the costume is returned in good condition."
+            },
+            "rentalPeriod": {
+                "term": "Rental Period",
+                "def": "The duration you keep the costume. Minimum 1 day. Late returns incur fees."
+            },
+            "verification": {
+                "term": "Identity Verification",
+                "def": "The process of submitting your ID card/Passport to confirm your identity before renting."
+            },
+            "proof": {
+                "term": "Payment Proof",
+                "def": "A screenshot or photo of your bank transfer slip used to confirm your payment."
+            }
+        },
+        "flowchart": {
+            "title": "Booking Process Flow",
+            "step1": "Browse",
+            "step2": "Book",
+            "step3": "Pay",
+            "step4": "Verify",
+            "step5": "Pickup",
+            "step6": "Return"
+        }
+    }
+}
